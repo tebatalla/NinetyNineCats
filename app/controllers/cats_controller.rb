@@ -36,7 +36,12 @@ class CatsController < ApplicationController
     else
       render :edit
     end
+  end
 
+  def destroy
+    @cat = Cat.find(params[:id])
+    @cat.try(:destroy)
+    redirect_to cats_url
   end
 
   private

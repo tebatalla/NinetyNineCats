@@ -16,6 +16,15 @@
   </tbody>
 </table>
 <br>
+<h2>Rental Requests</h2>
+<ul>
+  <% @cat.cat_rental_requests.order(:start_date).each do |request| %>
+    <li> <%= request.start_date %> to <%= request.end_date %> </li>
+  <% end %>
+</ul>
+<br>
+<%= button_to 'Delete this cat', cat_url(@cat), method: :delete %>
+<br>
 <%= link_to 'Edit ' + @cat.name, edit_cat_url(@cat) %>
 <br>
 <%= link_to 'Back to all cats', cats_url %>

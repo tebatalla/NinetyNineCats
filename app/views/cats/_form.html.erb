@@ -2,9 +2,12 @@
   <% if action == "Edit" %>
     <input type="hidden" name="_method" value="patch">
   <% end %>
+
   <label>Name <input type="text" name="cat[name]" value="<%= cat.name %>"></label>
+
   <br>
   <br>
+
   <label>Sex</label>
   <label>M
     <input type="radio" name="cat[sex]" value="M" <%= 'checked' if cat.sex == "M" %>>
@@ -12,8 +15,10 @@
   <label>F
     <input type="radio" name="cat[sex]" value="F" <%= 'checked' if cat.sex == "F" %>>
   </label>
+
   <br>
   <br>
+
   <label>Color
     <select name="cat[color]">
       <option></option>
@@ -22,18 +27,24 @@
       <% end %>
     </select>
   </label>
+
   <br>
   <br>
+
   <label>Birth Date
     <input name="cat[birth_date]" type="date" value="<%=cat.birth_date%>">
   </label>
+
   <br>
   <br>
+
   <label>Description
     <textarea name="cat[description]" rows="4" cols="20"></textarea>
   </label>
+
   <br>
   <br>
+
   <input type="submit" value="<%= action %> Cat!">
 </form>
 <br>
