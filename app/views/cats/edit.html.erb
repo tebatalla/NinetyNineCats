@@ -1,0 +1,4 @@
+<h1>Edit <%= @cat.name %></h1>
+<%=  render "form", cat: @cat, action: "Edit", url: cat_url(@cat) %>
+<br>
+<%= link_to 'Back to this cat', cat_url(@cat)%>
