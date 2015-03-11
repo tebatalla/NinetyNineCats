@@ -17,6 +17,14 @@ class Cat < ActiveRecord::Base
 
   has_many :cat_rental_requests, dependent: :destroy
 
+  belongs_to(
+    :owner,
+    foreign_key: :user_id,
+    primary_key: :id,
+    class_name: "User"
+  )
+
+  
   def age
     today = Date.today
     age = today.year - birth_date.year

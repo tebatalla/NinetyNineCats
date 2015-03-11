@@ -14,9 +14,12 @@ class ApplicationController < ActionController::Base
     self.session[:token] = user.session_token
   end
 
+  private
+
   def signed_in_redirect
     if current_user
       redirect_to cats_url
     end
   end
+
 end

@@ -5,13 +5,14 @@ class CatRentalRequest < ActiveRecord::Base
     "DENIED"
   ]
 
-  validates :cat_id, :start_date, :end_date, :status, presence: true
+  validates :cat_id, :start_date, :end_date, :status, :user_id, presence: true
   validates :status, inclusion: STATUSES
   validate :overlapping_approved_requests
 
   after_initialize { status ||= "PENDING" }
 
   belongs_to :cat
+  belongs_to :user
 
   def pending?
     status == 'PENDING'
@@ -34,7 +35,7 @@ class CatRentalRequest < ActiveRecord::Base
 
 
     def overlapping_pending_requests
-      overlapping_requests.select { |request| request.status == 'PENDING' }
+      overlapping_requests.select { |request| request.pending? }
     end
 
     def overlapping_requests
@@ -47,8 +48,7 @@ class CatRentalRequest < ActiveRecord::Base
           (cat_rental_requests.id <> :id OR :id IS NULL) AND
           cat_id = :cat_id AND
           (
-            (start_date BETWEEN :start_date AND :end_date) OR
-            (end_date BETWEEN :start_date AND :end_date)
+            :start_date <= end_date AND start_date <= :end_date
           )
       SQL
       p data

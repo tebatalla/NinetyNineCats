@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   validates :user_name, :session_token, :password_digest, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
+  has_many :cats
+  has_many :cat_rental_requests
+
   def self.find_by_credentials(user_name, password)
     user = User.find_by(user_name: user_name)
     return nil if user.nil?

@@ -20,17 +20,19 @@
 <ul>
   <% @cat.cat_rental_requests.order(:start_date).each do |request| %>
     <li style="list-style-type:none">
-      <%= request.start_date %> to <%= request.end_date %>
-      <% if request.pending? %>
+      <%= request.start_date %> to <%= request.end_date %> - <%= request.user.user_name %>
+      <% if request.pending? && @cat.owner == current_user %>
       <%= button_to 'Approve', approve_cat_rental_request_url(request), method: :post %>
       <%= button_to 'Deny', deny_cat_rental_request_url(request), method: :post %>
       <% end %>
     </li>
   <% end %>
 </ul>
+<% if @cat.owner == current_user %>
 <br>
 <%= button_to 'Delete this cat', cat_url(@cat), method: :delete %>
 <br>
 <%= link_to 'Edit ' + @cat.name, edit_cat_url(@cat) %>
 <br>
+<% end %>
 <%= link_to 'Back to all cats', cats_url %>
