@@ -19,7 +19,13 @@
 <h2>Rental Requests</h2>
 <ul>
   <% @cat.cat_rental_requests.order(:start_date).each do |request| %>
-    <li> <%= request.start_date %> to <%= request.end_date %> </li>
+    <li style="list-style-type:none">
+      <%= request.start_date %> to <%= request.end_date %>
+      <% if request.pending? %>
+      <%= button_to 'Approve', approve_cat_rental_request_url(request), method: :post %>
+      <%= button_to 'Deny', deny_cat_rental_request_url(request), method: :post %>
+      <% end %>
+    </li>
   <% end %>
 </ul>
 <br>
