@@ -1,6 +1,7 @@
 <h1>New Request</h1>
 
 <form action=<%= cat_rental_requests_url %> method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <label>Select Cat
     <select name="cat_rental_request[cat_id]">
       <option></option>
