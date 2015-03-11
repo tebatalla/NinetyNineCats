@@ -1,5 +1,6 @@
 class CatRentalRequestsController < ApplicationController
   before_action :is_cat_owner, only: [:approve, :deny]
+  before_action :not_signed_in
 
   def new
     @cat_rental_request = CatRentalRequest.new

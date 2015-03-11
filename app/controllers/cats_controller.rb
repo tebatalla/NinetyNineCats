@@ -1,4 +1,5 @@
 class CatsController < ApplicationController
+  before_action :not_signed_in, only: [:create, :new]
   before_action :is_cat_owner, only: [:edit, :update]
 
   def index

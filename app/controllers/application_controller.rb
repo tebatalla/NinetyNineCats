@@ -22,4 +22,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def not_signed_in
+    unless current_user
+      redirect_to new_session_url
+    end
+  end
+
 end

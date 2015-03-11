@@ -5,7 +5,12 @@
     <%= csrf_meta_tags %>
 </head>
 <body>
-<%= current_user ? "Hello #{current_user.user_name}" : link_to('Log in!', new_session_url) %>
+<% if current_user %>
+<%= "Hello #{current_user.user_name}" %>
+<% else %>
+<%= link_to('Log in!', new_session_url) %>
+<%= link_to('Sign up!', new_user_url) %>
+<% end %>
 <br>
 <%= button_to 'Log Out', session_url, method: :delete if current_user %>
 <%= yield %>
