@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'sessions#new'
   resources :cats
   resources :cat_rental_requests, only: [:new, :edit, :create, :update, :destroy] do
     member do
