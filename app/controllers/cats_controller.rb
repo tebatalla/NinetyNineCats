@@ -1,6 +1,6 @@
 class CatsController < ApplicationController
-  before_action :not_signed_in, only: [:create, :new]
-  before_action :is_cat_owner, only: [:edit, :update]
+  before_action :require_signed_in, only: [:create, :new]
+  before_action :require_user_is_cat_owner, only: [:edit, :update]
 
   def index
     @cats = Cat.all.order(:id)
@@ -53,7 +53,7 @@ class CatsController < ApplicationController
     params.require(:cat).permit([:name, :sex, :color, :description, :birth_date])
   end
 
-  def is_cat_owner
+  def require_user_is_cat_owner
     cat = Cat.find(params[:id])
     if current_user != cat.owner
       redirect_to cats_url

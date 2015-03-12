@@ -1,6 +1,6 @@
 class CatRentalRequestsController < ApplicationController
-  before_action :is_cat_owner, only: [:approve, :deny]
-  before_action :not_signed_in
+  before_action :require_user_is_cat_owner, only: [:approve, :deny]
+  before_action :require_signed_in
 
   def new
     @cat_rental_request = CatRentalRequest.new
@@ -54,7 +54,7 @@ class CatRentalRequestsController < ApplicationController
     params.require(:cat_rental_request).permit([:cat_id, :start_date, :end_date])
   end
 
-  def is_cat_owner
+  def require_user_is_cat_owner
     cat = CatRentalRequest.find(params[:id]).cat
     if current_user != cat.owner
       redirect_to cats_url

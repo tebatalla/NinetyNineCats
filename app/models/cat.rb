@@ -1,8 +1,6 @@
 class Cat < ActiveRecord::Base
-  SEX = [
-    'M',
-    'F'
-  ]
+  SEX = ['M', 'F']
+
   COLORS = [
     'brown',
     'gray',
@@ -11,6 +9,7 @@ class Cat < ActiveRecord::Base
     'ginger',
     'tan'
   ]
+
   validates :color, :sex, :name, :birth_date, presence: true
   validates :sex, inclusion: SEX
   validates :color, inclusion: COLORS
@@ -24,7 +23,7 @@ class Cat < ActiveRecord::Base
     class_name: "User"
   )
 
-  
+
   def age
     today = Date.today
     age = today.year - birth_date.year

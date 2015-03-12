@@ -24,13 +24,13 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def signed_in_redirect
+  def require_not_signed_in
     if current_user
       redirect_to cats_url
     end
   end
 
-  def not_signed_in
+  def require_signed_in
     unless current_user
       redirect_to new_session_url
     end

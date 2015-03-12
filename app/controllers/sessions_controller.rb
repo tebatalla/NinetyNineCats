@@ -1,12 +1,13 @@
 class SessionsController < ApplicationController
-  before_action :signed_in_redirect, only: [:new, :create]
+  before_action :require_not_signed_in, only: [:new, :create]
 
   def new
     render :new
   end
 
   def create
-    @user = User.find_by_credentials(session_params[:user_name], session_params[:password])
+    username, password = session_params[:user_name], session_params[:password]
+    @user = User.find_by_credentials(username, password)
     if @user.nil?
       redirect_to new_session_url
     else
@@ -21,10 +22,8 @@ class SessionsController < ApplicationController
       session.destroy if session.user == current_user
       redirect_to user_url
     else
-      unless current_session.nil?
-        current_session.destroy
-        self.session[:token] = nil
-      end
+      current_session.destroy unless current_session.nil?
+      self.session[:token] = nil
       redirect_to new_session_url
     end
   end

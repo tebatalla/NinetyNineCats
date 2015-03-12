@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :signed_in_redirect, only: [:new, :create]
-  before_action :not_signed_in, only: [:show]
+  before_action :require_not_signed_in, only: [:new, :create]
+  before_action :require_signed_in, only: [:show]
 
   def new
     render :new

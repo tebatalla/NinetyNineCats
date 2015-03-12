@@ -5,18 +5,20 @@
     <%= csrf_meta_tags %>
 </head>
 <body>
-<% if current_user %>
-<%= "Hello " %> <%= link_to "#{current_user.user_name.capitalize}", user_url %>
-<% else %>
-<%= link_to('Log in!', new_session_url) %>
-<%= link_to('Sign up!', new_user_url) %>
-<% end %>
-<br>
-<% if current_user  %>
 
-<%= button_to 'Log Out', session_url, method: :delete %>
-<% end %>
-<%= yield %>
+  <% if current_user %>
+  <%= "Hello " %> <%= link_to "#{current_user.user_name.capitalize}", user_url %>
+  <% else %>
+  <%= link_to('Log in!', new_session_url) %>
+  <%= link_to('Sign up!', new_user_url) %>
+  <% end %>
+
+  <br>
+
+  <% if current_user  %>
+  <%= button_to 'Log Out', session_url, method: :delete %>
+  <% end %>
+  <%= yield %>
 
 </body>
 </html>
