@@ -5,11 +5,6 @@ class Session < ActiveRecord::Base
 
   belongs_to :user
 
-  def reset_session_token!
-    self.token = SecureRandom::urlsafe_base64
-    self.save
-  end
-
   def set_token
     self.token ||= SecureRandom::urlsafe_base64
   end

@@ -17,6 +17,7 @@
 </table>
 <br>
 <h2>Rental Requests</h2>
+<%= link_to 'Rent this cat', "/cat_rental_requests/new?cat_id=#{@cat.id}" %>
 <ul>
   <% @cat.cat_rental_requests.order(:start_date).each do |request| %>
     <li style="list-style-type:none">

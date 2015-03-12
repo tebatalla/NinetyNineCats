@@ -16,11 +16,17 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    unless current_session.nil?
-      current_session.reset_session_token!
-      session[:token] = nil
+    if params[:id]
+      session = Session.find(params[:id])
+      session.destroy if session.user == current_user
+      redirect_to user_url
+    else
+      unless current_session.nil?
+        current_session.destroy
+        self.session[:token] = nil
+      end
+      redirect_to new_session_url
     end
-    redirect_to new_session_url
   end
 
   private

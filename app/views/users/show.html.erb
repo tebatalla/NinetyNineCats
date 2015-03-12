@@ -1,0 +1,20 @@
+<h1>Hi, <%= current_user.user_name.capitalize %> </h1>
+<hr>
+<h2>Your cats</h2>
+<ul>
+  <% current_user.cats.each do |cat| %>
+    <li style="list-style-type:none"> <%= link_to cat.name, cat_url(cat) %></li>
+  <% end %>
+</ul>
+<hr>
+<h2>Your sessions</h2>
+<ul>
+  <% current_user.sessions.each do |session| %>
+    <li style="list-style-type:none">
+      <%= session.user_agent %> from <%= session.location %>
+      <%= button_to "Log out", session_url, method: :delete, params: { id: session.id }  %>
+    </li>
+  <% end %>
+</ul>
+<hr>
+<%= link_to 'Back to all cats', cats_url %>

@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :signed_in_redirect, only: [:new, :create]
-  
+  before_action :not_signed_in, only: [:show]
+
   def new
     render :new
   end
@@ -13,6 +14,11 @@ class UsersController < ApplicationController
     else
       render :new
     end
+  end
+
+  def show
+    @user = current_user
+    render :show
   end
 
   private

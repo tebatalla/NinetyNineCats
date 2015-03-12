@@ -27,6 +27,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
  gem 'bcrypt', require: 'bcrypt'
 
+ gem 'geocoder', require: 'geocoder'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

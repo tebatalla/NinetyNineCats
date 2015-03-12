@@ -15,12 +15,11 @@ class ApplicationController < ActionController::Base
   end
 
   def login_user!(user)
-    if current_session.nil?
-      session[:token] = Session.create(user_id: user.id).token
-    else
-      current_session.reset_session_token!
-      self.session[:token] = current_session.token
-    end
+    session[:token] = Session.create(
+      user_id: user.id,
+      user_agent: request.env["HTTP_USER_AGENT"],
+      location: request.location.address
+    ).token
   end
 
   private
